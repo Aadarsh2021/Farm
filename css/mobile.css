@@ -1,0 +1,267 @@
+/* Mobile Responsive Styles */
+
+/* Base mobile styles */
+@media (max-width: 768px) {
+    /* Header and Navigation */
+    header {
+        padding: 10px 0;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .logo i {
+        font-size: 1.5rem;
+    }
+
+    .search-container {
+        margin: 10px 0;
+    }
+
+    .search-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .category-select {
+        width: 100%;
+    }
+
+    .category-select select {
+        width: 100%;
+    }
+
+    .search-bar input {
+        width: 100%;
+    }
+
+    .nav-icons {
+        gap: 15px;
+    }
+
+    /* Hero Slider */
+    .hero-slider {
+        height: auto;
+        min-height: 300px;
+    }
+
+    .slide-content {
+        padding: 20px;
+    }
+
+    .product-title {
+        font-size: 1.5rem;
+    }
+
+    .product-description {
+        font-size: 0.9rem;
+    }
+
+    .product-details {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Features Bar */
+    .features-bar {
+        padding: 20px 0;
+    }
+
+    .feature-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .feature-item i {
+        margin-bottom: 10px;
+    }
+
+    /* Category Grid */
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .category-card {
+        padding: 15px;
+    }
+
+    .category-card img {
+        height: 120px;
+    }
+
+    /* Product Cards */
+    .product-card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .product-image {
+        height: 200px;
+    }
+
+    .product-info {
+        padding: 15px;
+    }
+
+    .product-name {
+        font-size: 1.1rem;
+    }
+
+    /* Newsletter */
+    .newsletter {
+        padding: 30px 0;
+    }
+
+    .newsletter-content {
+        padding: 20px;
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+    }
+
+    .newsletter-form input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-section {
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .footer-bottom {
+        text-align: center;
+    }
+
+    .payment-methods {
+        justify-content: center;
+        margin-top: 15px;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    /* Header */
+    .nav-icons {
+        gap: 10px;
+    }
+
+    .cart-icon, .account-icon {
+        font-size: 1.2rem;
+    }
+
+    /* Hero Slider */
+    .hero-slider {
+        min-height: 250px;
+    }
+
+    .slide-content {
+        padding: 15px;
+    }
+
+    .product-title {
+        font-size: 1.2rem;
+    }
+
+    .product-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Category Grid */
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Product Cards */
+    .product-image {
+        height: 180px;
+    }
+
+    .product-actions {
+        padding: 10px;
+    }
+
+    .wishlist-btn, .quick-view-btn {
+        padding: 8px;
+    }
+
+    /* Newsletter */
+    .newsletter-title {
+        font-size: 1.5rem;
+    }
+
+    .newsletter-description {
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablet devices */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Category Grid */
+    .category-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Product Cards */
+    .product-card {
+        width: calc(50% - 20px);
+    }
+
+    /* Newsletter */
+    .newsletter-form {
+        flex-direction: row;
+    }
+
+    .newsletter-form input {
+        width: 70%;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+    .product-card:hover {
+        transform: none;
+    }
+
+    .wishlist-btn:hover, .quick-view-btn:hover {
+        transform: none;
+    }
+
+    .add-to-cart:hover {
+        transform: none;
+    }
+}
+
+/* Landscape mode optimizations */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero-slider {
+        height: auto;
+        min-height: 200px;
+    }
+
+    .slide-content {
+        padding: 10px;
+    }
+
+    .product-title {
+        font-size: 1.2rem;
+    }
+
+    .product-description {
+        display: none;
+    }
+} 
