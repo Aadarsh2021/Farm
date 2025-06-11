@@ -1,6 +1,6 @@
 /* Enhanced Hero Section Animations */
 
-/* Advanced Hero Slider Container */
+/* Advanced Hero Slider Container - Only apply to existing hero slider */
 .hero-slider {
     position: relative;
     width: 100%;
@@ -23,8 +23,8 @@
     transform-style: preserve-3d;
 }
 
-/* Advanced Slide Animations */
-.slide {
+/* Advanced Slide Animations - Only for hero slider slides */
+.hero-slider .slide {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -49,7 +49,7 @@
 }
 
 /* Active slide animations */
-.slide.active {
+.hero-slider .slide.active {
     opacity: 1;
     visibility: visible;
     transform: 
@@ -60,7 +60,7 @@
 }
 
 /* Next slide preparation */
-.slide.next {
+.hero-slider .slide.next {
     transform: 
         translateX(100%) 
         rotateY(15deg) 
@@ -70,7 +70,7 @@
 }
 
 /* Previous slide preparation */
-.slide.prev {
+.hero-slider .slide.prev {
     transform: 
         translateX(-100%) 
         rotateY(-15deg) 
@@ -80,7 +80,7 @@
 }
 
 /* Enhanced Image Container with Parallax */
-.slide-image {
+.hero-slider .slide-image {
     flex: 1;
     height: 100%;
     position: relative;
@@ -93,7 +93,7 @@
 }
 
 /* Advanced Image Animations */
-.slide-image img {
+.hero-slider .slide-image img {
     width: 110%;
     height: 110%;
     object-fit: cover;
@@ -107,7 +107,7 @@
 }
 
 /* Parallax effect on active slide */
-.slide.active .slide-image img {
+.hero-slider .slide.active .slide-image img {
     transform: 
         scale(1.05) 
         translateZ(20px) 
@@ -116,7 +116,7 @@
 }
 
 /* Hover effects */
-.slide:hover .slide-image img {
+.hero-slider .slide:hover .slide-image img {
     transform: 
         scale(1.08) 
         translateZ(30px) 
@@ -125,7 +125,7 @@
 }
 
 /* Enhanced Content Container */
-.slide-content {
+.hero-slider .slide-content {
     flex: 1;
     padding: 3rem;
     background: rgba(255, 255, 255, 0.95);
@@ -145,13 +145,13 @@
 }
 
 /* Active slide content animation */
-.slide.active .slide-content {
+.hero-slider .slide.active .slide-content {
     transform: translateX(0) translateY(0);
     animation: contentSlideIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* Dark theme adjustments */
-[data-theme="dark"] .slide-content {
+[data-theme="dark"] .hero-slider .slide-content {
     background: rgba(30, 30, 30, 0.95);
     color: var(--text-color);
     box-shadow: 
@@ -161,7 +161,7 @@
 }
 
 /* Content elements animations */
-.slide-content > * {
+.hero-slider .slide-content > * {
     opacity: 0;
     transform: translateY(30px);
     transition: 
@@ -169,38 +169,38 @@
         transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.slide.active .slide-content > * {
+.hero-slider .slide.active .slide-content > * {
     opacity: 1;
     transform: translateY(0);
 }
 
 /* Staggered animation delays */
-.slide.active .product-badge {
+.hero-slider .slide.active .product-badge {
     transition-delay: 0.1s;
 }
 
-.slide.active .product-title {
+.hero-slider .slide.active .product-title {
     transition-delay: 0.2s;
 }
 
-.slide.active .product-description {
+.hero-slider .slide.active .product-description {
     transition-delay: 0.3s;
 }
 
-.slide.active .product-details {
+.hero-slider .slide.active .product-details {
     transition-delay: 0.4s;
 }
 
-.slide.active .product-price {
+.hero-slider .slide.active .product-price {
     transition-delay: 0.5s;
 }
 
-.slide.active .product-actions {
+.hero-slider .slide.active .product-actions {
     transition-delay: 0.6s;
 }
 
 /* Enhanced Product Badge */
-.product-badge {
+.hero-slider .product-badge {
     display: inline-block;
     padding: 0.8rem 1.5rem;
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
@@ -215,7 +215,7 @@
     overflow: hidden;
 }
 
-.product-badge::before {
+.hero-slider .product-badge::before {
     content: '';
     position: absolute;
     top: 0;
@@ -226,12 +226,12 @@
     transition: left 0.6s;
 }
 
-.slide.active .product-badge::before {
+.hero-slider .slide.active .product-badge::before {
     left: 100%;
 }
 
 /* Enhanced Product Title */
-.product-title {
+.hero-slider .product-title {
     font-size: 2.8rem;
     color: var(--text-color);
     margin-bottom: 1.5rem;
@@ -244,14 +244,14 @@
 }
 
 /* Enhanced Price Animation */
-.product-price {
+.hero-slider .product-price {
     display: flex;
     align-items: center;
     gap: 1.5rem;
     margin-bottom: 2rem;
 }
 
-.price {
+.hero-slider .price {
     font-size: 2.2rem;
     font-weight: 800;
     color: var(--primary-color);
@@ -259,7 +259,7 @@
     animation: priceGlow 3s ease-in-out infinite;
 }
 
-.discount {
+.hero-slider .discount {
     background: var(--accent-color);
     color: white;
     padding: 0.5rem 1rem;
@@ -270,12 +270,12 @@
 }
 
 /* Enhanced Action Buttons */
-.product-actions {
+.hero-slider .product-actions {
     display: flex;
     gap: 1.5rem;
 }
 
-.cta-button, .secondary-button {
+.hero-slider .cta-button, .hero-slider .secondary-button {
     padding: 1rem 2rem;
     border-radius: 30px;
     font-weight: 700;
@@ -289,18 +289,18 @@
     letter-spacing: 0.5px;
 }
 
-.cta-button {
+.hero-slider .cta-button {
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     color: white;
     box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
 }
 
-.cta-button:hover {
+.hero-slider .cta-button:hover {
     transform: translateY(-5px) scale(1.05);
     box-shadow: 0 15px 35px rgba(76, 175, 80, 0.4);
 }
 
-.cta-button::before {
+.hero-slider .cta-button::before {
     content: '';
     position: absolute;
     top: 0;
@@ -311,7 +311,7 @@
     transition: left 0.6s;
 }
 
-.cta-button:hover::before {
+.hero-slider .cta-button:hover::before {
     left: 100%;
 }
 
@@ -458,36 +458,36 @@
         border-radius: 10px;
     }
 
-    .slide {
+    .hero-slider .slide {
         flex-direction: column;
         padding: 1.5rem;
     }
 
-    .slide-image {
+    .hero-slider .slide-image {
         height: 60%;
         margin-bottom: 1rem;
     }
 
-    .slide-content {
+    .hero-slider .slide-content {
         margin-left: 0;
         padding: 2rem;
         transform: translateY(30px);
     }
 
-    .slide.active .slide-content {
+    .hero-slider .slide.active .slide-content {
         transform: translateY(0);
     }
 
-    .product-title {
+    .hero-slider .product-title {
         font-size: 2.2rem;
     }
 
-    .slider-controls {
+    .hero-slider .slider-controls {
         bottom: 1rem;
         right: 1rem;
     }
 
-    .prev-slide, .next-slide {
+    .hero-slider .prev-slide, .hero-slider .next-slide {
         width: 50px;
         height: 50px;
         font-size: 1rem;
@@ -495,30 +495,30 @@
 }
 
 /* Performance optimizations */
-.slide {
+.hero-slider .slide {
     will-change: transform, opacity;
 }
 
-.slide-image img {
+.hero-slider .slide-image img {
     will-change: transform, filter;
 }
 
-.slide-content {
+.hero-slider .slide-content {
     will-change: transform, opacity;
 }
 
 /* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
-    .slide,
-    .slide-image img,
-    .slide-content,
-    .product-badge,
-    .price,
-    .discount,
-    .cta-button,
-    .prev-slide,
-    .next-slide,
-    .dot {
+    .hero-slider .slide,
+    .hero-slider .slide-image img,
+    .hero-slider .slide-content,
+    .hero-slider .product-badge,
+    .hero-slider .price,
+    .hero-slider .discount,
+    .hero-slider .cta-button,
+    .hero-slider .prev-slide,
+    .hero-slider .next-slide,
+    .hero-slider .dot {
         animation: none !important;
         transition-duration: 0.2s !important;
     }
