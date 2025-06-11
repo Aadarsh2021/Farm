@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initialize Hero Slider
-    initializeHeroSlider();
+    // Initialize Hero Slider (now handled by hero-slider.js)
+    // initializeHeroSlider();
 
     // Update cart count
     updateCartCount();

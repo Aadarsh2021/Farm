@@ -1,0 +1,525 @@
+/* Enhanced Hero Section Animations */
+
+/* Advanced Hero Slider Container */
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    background: var(--background-color);
+    border-radius: 15px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 8px 16px rgba(0, 0, 0, 0.06);
+    margin-bottom: 2rem;
+    perspective: 1000px;
+}
+
+/* Enhanced Slide Container */
+.slider-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+/* Advanced Slide Animations */
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: 
+        translateX(100%) 
+        rotateY(15deg) 
+        scale(0.95);
+    transition: 
+        all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        opacity 0.6s ease,
+        visibility 0.6s ease;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, 
+        rgba(0,0,0,0.1) 0%, 
+        rgba(0,0,0,0.05) 50%, 
+        rgba(255,255,255,0.1) 100%);
+    backdrop-filter: blur(5px);
+}
+
+/* Active slide animations */
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: 
+        translateX(0) 
+        rotateY(0deg) 
+        scale(1);
+    z-index: 2;
+}
+
+/* Next slide preparation */
+.slide.next {
+    transform: 
+        translateX(100%) 
+        rotateY(15deg) 
+        scale(0.95);
+    opacity: 0;
+    z-index: 1;
+}
+
+/* Previous slide preparation */
+.slide.prev {
+    transform: 
+        translateX(-100%) 
+        rotateY(-15deg) 
+        scale(0.95);
+    opacity: 0;
+    z-index: 1;
+}
+
+/* Enhanced Image Container with Parallax */
+.slide-image {
+    flex: 1;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.15),
+        0 5px 15px rgba(0, 0, 0, 0.08);
+    transform-style: preserve-3d;
+}
+
+/* Advanced Image Animations */
+.slide-image img {
+    width: 110%;
+    height: 110%;
+    object-fit: cover;
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    transition: 
+        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        filter 0.6s ease;
+    filter: brightness(1.1) contrast(1.05) saturate(1.1);
+}
+
+/* Parallax effect on active slide */
+.slide.active .slide-image img {
+    transform: 
+        scale(1.05) 
+        translateZ(20px) 
+        rotateX(2deg);
+    animation: parallaxFloat 6s ease-in-out infinite;
+}
+
+/* Hover effects */
+.slide:hover .slide-image img {
+    transform: 
+        scale(1.08) 
+        translateZ(30px) 
+        rotateX(3deg);
+    filter: brightness(1.15) contrast(1.1) saturate(1.15);
+}
+
+/* Enhanced Content Container */
+.slide-content {
+    flex: 1;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    margin-left: 3rem;
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.15),
+        0 10px 25px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform: translateX(50px) translateY(20px);
+    transition: 
+        all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Active slide content animation */
+.slide.active .slide-content {
+    transform: translateX(0) translateY(0);
+    animation: contentSlideIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .slide-content {
+    background: rgba(30, 30, 30, 0.95);
+    color: var(--text-color);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.4),
+        0 10px 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Content elements animations */
+.slide-content > * {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 
+        opacity 0.6s ease,
+        transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.slide.active .slide-content > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered animation delays */
+.slide.active .product-badge {
+    transition-delay: 0.1s;
+}
+
+.slide.active .product-title {
+    transition-delay: 0.2s;
+}
+
+.slide.active .product-description {
+    transition-delay: 0.3s;
+}
+
+.slide.active .product-details {
+    transition-delay: 0.4s;
+}
+
+.slide.active .product-price {
+    transition-delay: 0.5s;
+}
+
+.slide.active .product-actions {
+    transition-delay: 0.6s;
+}
+
+/* Enhanced Product Badge */
+.product-badge {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+    animation: badgePulse 2s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s;
+}
+
+.slide.active .product-badge::before {
+    left: 100%;
+}
+
+/* Enhanced Product Title */
+.product-title {
+    font-size: 2.8rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--text-color), var(--primary-color));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Enhanced Price Animation */
+.product-price {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.price {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    position: relative;
+    animation: priceGlow 3s ease-in-out infinite;
+}
+
+.discount {
+    background: var(--accent-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    animation: discountBounce 2s ease-in-out infinite;
+    box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
+}
+
+/* Enhanced Action Buttons */
+.product-actions {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.cta-button, .secondary-button {
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cta-button {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
+}
+
+.cta-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(76, 175, 80, 0.4);
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s;
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+/* Enhanced Slider Controls */
+.slider-controls {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 10;
+}
+
+.prev-slide, .next-slide {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.prev-slide:hover, .next-slide:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 12px 30px rgba(76, 175, 80, 0.3);
+}
+
+/* Enhanced Dots Indicator */
+.slider-dots {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.dot.active {
+    background: var(--primary-color);
+    transform: scale(1.3);
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+}
+
+.dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    transition: border-color 0.3s ease;
+}
+
+.dot.active::before {
+    border-color: var(--primary-color);
+    animation: dotRipple 2s infinite;
+}
+
+/* Keyframe Animations */
+@keyframes parallaxFloat {
+    0%, 100% { transform: scale(1.05) translateZ(20px) rotateX(2deg) translateY(0); }
+    50% { transform: scale(1.05) translateZ(20px) rotateX(2deg) translateY(-10px); }
+}
+
+@keyframes contentSlideIn {
+    0% { 
+        transform: translateX(50px) translateY(20px) rotateY(10deg);
+        opacity: 0;
+    }
+    100% { 
+        transform: translateX(0) translateY(0) rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes badgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes priceGlow {
+    0%, 100% { text-shadow: 0 0 5px rgba(76, 175, 80, 0.3); }
+    50% { text-shadow: 0 0 20px rgba(76, 175, 80, 0.6); }
+}
+
+@keyframes discountBounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-5px) rotate(2deg); }
+    75% { transform: translateY(-2px) rotate(-1deg); }
+}
+
+@keyframes dotRipple {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
+/* Loading Animation */
+.slide-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+.slide-loader {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(76, 175, 80, 0.2);
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Animations */
+@media (max-width: 768px) {
+    .hero-slider {
+        height: 500px;
+        border-radius: 10px;
+    }
+
+    .slide {
+        flex-direction: column;
+        padding: 1.5rem;
+    }
+
+    .slide-image {
+        height: 60%;
+        margin-bottom: 1rem;
+    }
+
+    .slide-content {
+        margin-left: 0;
+        padding: 2rem;
+        transform: translateY(30px);
+    }
+
+    .slide.active .slide-content {
+        transform: translateY(0);
+    }
+
+    .product-title {
+        font-size: 2.2rem;
+    }
+
+    .slider-controls {
+        bottom: 1rem;
+        right: 1rem;
+    }
+
+    .prev-slide, .next-slide {
+        width: 50px;
+        height: 50px;
+        font-size: 1rem;
+    }
+}
+
+/* Performance optimizations */
+.slide {
+    will-change: transform, opacity;
+}
+
+.slide-image img {
+    will-change: transform, filter;
+}
+
+.slide-content {
+    will-change: transform, opacity;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .slide,
+    .slide-image img,
+    .slide-content,
+    .product-badge,
+    .price,
+    .discount,
+    .cta-button,
+    .prev-slide,
+    .next-slide,
+    .dot {
+        animation: none !important;
+        transition-duration: 0.2s !important;
+    }
+} 
