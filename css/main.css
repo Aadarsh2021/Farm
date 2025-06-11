@@ -9,6 +9,59 @@
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    background: var(--bg-color);
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    animation: themeTransition 0.3s ease;
+}
+
+/* Ensure no unwanted overlays or frames */
+body > * {
+    position: relative;
+    z-index: auto;
+}
+
+/* Reset any potential container issues */
+.container {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Ensure main content displays properly */
+main {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* Hide any potential debugging overlays */
+.mobile-frame,
+.browser-frame,
+.dev-tools-frame {
+    display: none !important;
+}
+
+/* Ensure slider displays correctly */
+.hero-slider {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+}
+
 :root {
     /* Colors */
     --primary-color: #4CAF50;
@@ -106,16 +159,6 @@
     --input-text: #ffffff;
     --error-color: #ff5252;
     --info-color: #64b5f6;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
-    min-height: 100vh;
-    position: relative;
-    animation: themeTransition 0.3s ease;
 }
 
 /* Header and Navigation */
@@ -1649,4 +1692,6 @@ img {
     30% {
         transform: translateY(-5px);
     }
-} 
+}
+
+ 
