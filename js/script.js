@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initialize Hero Slider (now handled by hero-slider.js)
-    // initializeHeroSlider();
+    // Initialize Hero Slider
+    initializeHeroSlider();
 
     // Update cart count
     updateCartCount();
@@ -264,30 +264,67 @@ function initializeHeroSlider() {
     const slides = heroSlider.querySelectorAll('.slide');
     const prevBtn = heroSlider.querySelector('.prev-slide');
     const nextBtn = heroSlider.querySelector('.next-slide');
+    const dots = heroSlider.querySelectorAll('.dot');
     let currentSlide = 0;
+    let autoSlideInterval;
     
     function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.style.transform = `translateX(${100 * (i - index)}%)`;
-        });
+        // Remove active class from all slides and dots
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        // Add active class to current slide and dot
+        if (slides[index]) slides[index].classList.add('active');
+        if (dots[index]) dots[index].classList.add('active');
+        
+        currentSlide = index;
     }
     
     function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
+        const next = (currentSlide + 1) % slides.length;
+        showSlide(next);
     }
     
     function prevSlide() {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
+        const prev = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prev);
     }
     
-    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(nextSlide, 5000);
+    }
     
-    // Auto slide
-    setInterval(nextSlide, 5000);
+    function stopAutoSlide() {
+        clearInterval(autoSlideInterval);
+    }
     
-    // Show initial slide
-    showSlide(currentSlide);
+    // Event listeners
+    if (prevBtn) prevBtn.addEventListener('click', () => {
+        prevSlide();
+        stopAutoSlide();
+        startAutoSlide();
+    });
+    
+    if (nextBtn) nextBtn.addEventListener('click', () => {
+        nextSlide();
+        stopAutoSlide();
+        startAutoSlide();
+    });
+    
+    // Dot navigation
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            showSlide(index);
+            stopAutoSlide();
+            startAutoSlide();
+        });
+    });
+    
+    // Pause on hover
+    heroSlider.addEventListener('mouseenter', stopAutoSlide);
+    heroSlider.addEventListener('mouseleave', startAutoSlide);
+    
+    // Initialize
+    showSlide(0);
+    startAutoSlide();
 } 
