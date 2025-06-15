@@ -50,7 +50,6 @@ function setupEventListeners() {
 
     // Add to cart button
     document.getElementById('add-to-cart').addEventListener('click', () => {
-        const quantity = parseInt(document.getElementById('quantity').value);
         const productId = new URLSearchParams(window.location.search).get('id');
         
         if (!productId) {
@@ -58,7 +57,8 @@ function setupEventListeners() {
             return;
         }
 
-        addToCart(productId, quantity);
+        // Always add only 1 item regardless of quantity selector
+        addToCart(productId, 1);
     });
 
     // Buy now button
@@ -101,11 +101,12 @@ function addToCart(productId, quantity) {
     // Check if product already exists in cart
     const existingItem = cart.find(item => item.id === productId);
     if (existingItem) {
-        existingItem.quantity += quantity;
+        // Always add only 1 item, don't accumulate
+        existingItem.quantity += 1;
     } else {
         cart.push({
             id: productId,
-            quantity: quantity
+            quantity: 1
         });
     }
     

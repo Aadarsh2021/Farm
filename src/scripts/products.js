@@ -128,69 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
         image: p.image
     })));
     
-    // Add event listeners to cart buttons
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('add-to-cart') || e.target.closest('.add-to-cart')) {
-            const button = e.target.classList.contains('add-to-cart') ? e.target : e.target.closest('.add-to-cart');
-            const productId = parseInt(button.getAttribute('data-id'));
-            
-            // Get current cart
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            
-            // Remove any duplicate items by combining quantities
-            const uniqueCart = [];
-            cart.forEach(item => {
-                const existingItem = uniqueCart.find(i => i.id === item.id);
-                if (existingItem) {
-                    existingItem.quantity += item.quantity;
-                } else {
-                    uniqueCart.push({...item});
-                }
-            });
-            cart = uniqueCart;
-            
-            // Find existing item
-            const existingItem = cart.find(item => item.id === productId);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                // Add new item with quantity 1
-                const product = products.find(p => p.id === productId);
-                if (product) {
-                    cart.push({
-                        id: productId,
-                        quantity: 1,
-                        name: product.name,
-                        price: product.price,
-                        image: product.image
-                    });
-                }
-            }
-            
-            // Save cart
-            localStorage.setItem('cart', JSON.stringify(cart));
-            
-            // Update cart count
-            const cartCount = document.querySelector('.cart-count');
-            if (cartCount) {
-                // Get fresh cart data to ensure consistency
-                const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
-                const totalItems = currentCart.reduce((sum, item) => sum + item.quantity, 0);
-                cartCount.textContent = totalItems;
-                cartCount.style.display = totalItems > 0 ? 'block' : 'none';
-                
-                // Log for debugging
-                console.log('Cart count update in products.js:', {
-                    cartContents: currentCart,
-                    totalItems: totalItems
-                });
-            }
-            
-            // Show notification
-            showNotification('Product added to cart!');
-        }
-    });
+    // Note: Add to cart functionality is handled by the global event listener in script.js
+    // This prevents duplicate event listeners that would add items twice
 });
 
 // Filter Functions
@@ -413,7 +352,7 @@ function renderProducts() {
     productsContainer.innerHTML = productsToShow.map(product => `
         <div class="product-card" data-category="${product.category}">
             <div class="product-image">
-                <img src="../${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='../images/farmease_logo.jpg'">
+                <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='../assets/farmease_logo.jpg'">
                 <div class="product-badge">${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</div>
             </div>
             <div class="product-info">

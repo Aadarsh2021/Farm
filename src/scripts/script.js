@@ -35,30 +35,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add to cart functionality
     document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('add-to-cart') || e.target.closest('.add-to-cart')) {
-            const button = e.target.classList.contains('add-to-cart') ? e.target : e.target.closest('.add-to-cart');
+        // Handle all add-to-cart button variations
+        if (e.target.classList.contains('add-to-cart') || e.target.closest('.add-to-cart') ||
+            e.target.classList.contains('add-to-cart-btn') || e.target.closest('.add-to-cart-btn') ||
+            e.target.classList.contains('add-to-cart-overlay') || e.target.closest('.add-to-cart-overlay')) {
+            
+            const button = e.target.classList.contains('add-to-cart') ? e.target : 
+                          e.target.classList.contains('add-to-cart-btn') ? e.target :
+                          e.target.classList.contains('add-to-cart-overlay') ? e.target :
+                          e.target.closest('.add-to-cart') || e.target.closest('.add-to-cart-btn') || e.target.closest('.add-to-cart-overlay');
+            
             const productId = parseInt(button.getAttribute('data-id'));
             
-            // Add to cart
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const existingItem = cart.find(item => item.id === productId);
-            
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({
-                    id: productId,
-                    quantity: 1
-                });
+            if (productId && window.addToCart) {
+                // Use the global addToCart function
+                window.addToCart(productId, 1);
+                showNotification('Product added to cart!');
             }
-            
-            localStorage.setItem('cart', JSON.stringify(cart));
-            
-            // Update cart count
-            updateCartCount();
-            
-            // Show notification
-            showNotification('Product added to cart!');
         }
     });
 
@@ -96,8 +89,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Quick View Modal
     document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('quick-view') || e.target.closest('.quick-view')) {
-            const button = e.target.classList.contains('quick-view') ? e.target : e.target.closest('.quick-view');
+        if (e.target.classList.contains('quick-view') || e.target.closest('.quick-view') ||
+            e.target.classList.contains('quick-view-btn') || e.target.closest('.quick-view-btn')) {
+            const button = e.target.classList.contains('quick-view') ? e.target : 
+                          e.target.classList.contains('quick-view-btn') ? e.target :
+                          e.target.closest('.quick-view') || e.target.closest('.quick-view-btn');
             const productId = parseInt(button.getAttribute('data-id'));
             const product = window.products.find(p => p.id === productId);
             
@@ -562,8 +558,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Setup add to cart in modal
                     const addToCartBtn = modalBody.querySelector('.add-to-cart');
                     addToCartBtn.addEventListener('click', () => {
-                        const quantity = quantityInput.value;
-                        this.showNotification(`${productData.name} (${quantity}) added to cart`);
+                        // Get product ID from the card
+                        const productId = parseInt(card.getAttribute('data-id'));
+                        if (productId && window.addToCart) {
+                            window.addToCart(productId, 1);
+                        }
+                        this.showNotification(`${productData.name} (1) added to cart`);
                         modal.classList.remove('active');
                         document.body.style.overflow = '';
                     });
@@ -805,21 +805,11 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         addToCart(productCard) {
-            const productId = productCard.getAttribute('data-id');
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const existingItem = cart.find(item => item.id === parseInt(productId));
-
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({
-                    id: parseInt(productId),
-                    quantity: 1
-                });
+            const productId = parseInt(productCard.getAttribute('data-id'));
+            // Use the global addToCart function to prevent duplicates
+            if (window.addToCart) {
+                window.addToCart(productId, 1);
             }
-
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount();
             showNotification('Product added to cart!', 'success');
         },
 
@@ -980,6 +970,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Enhanced Product Card Functionality
     initializeEnhancedProductCards();
+    
+    // Note: initializeEnhancedCart() is disabled to prevent duplicate event listeners
+    // The main add-to-cart event listener at the top handles all cart additions
 });
 
 // Utility Functions
@@ -1508,8 +1501,8 @@ function initializeQuickView() {
         // Add to cart from quick view
         modal.querySelector('.add-to-cart-quick').addEventListener('click', function() {
             const productId = this.dataset.id;
-            const quantity = parseInt(qtyInput.value);
-            addToCart(productId, quantity);
+            // Always add only 1 item regardless of quantity selector
+            addToCart(productId, 1);
             closeQuickView(modal);
         });
     }
@@ -1575,8 +1568,10 @@ function initializeEnhancedCart() {
         
         // Simulate API call delay
         setTimeout(() => {
-            // Add to cart
-            addToCart(productId, quantity);
+            // Add to cart using global function
+            if (window.addToCart) {
+                window.addToCart(productId, 1); // Always add 1 item
+            }
             
             // Success animation
             btn.innerHTML = '<i class="fas fa-check"></i> Added!';

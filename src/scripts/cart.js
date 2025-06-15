@@ -252,13 +252,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const existingItem = cart.find(item => item.id === productId);
         if (existingItem) {
-            existingItem.quantity += quantity;
+            // Always add only 1 item regardless of quantity parameter
+            existingItem.quantity += 1;
         } else {
-            cart.push({ id: productId, quantity: quantity });
+            cart.push({ id: productId, quantity: 1 });
         }
         
         updateCart();
-        console.log('Added to cart:', product.name, 'Quantity:', quantity);
+        console.log('Added to cart:', product.name, 'Quantity: 1');
     };
     
     // Function to clear cart (for testing)
