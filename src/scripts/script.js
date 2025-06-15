@@ -935,6 +935,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize bestsellers section
     bestsellersSection.init();
+
+    // Enhanced Product Card Functionality
+    initializeEnhancedProductCards();
 });
 
 // Utility Functions
@@ -954,9 +957,7 @@ function showNotification(message, type = 'success') {
     
     setTimeout(() => {
         notification.classList.remove('show');
-        setTimeout(() => {
-            notification.remove();
-        }, 300);
+        setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
 
@@ -1265,4 +1266,522 @@ style.textContent = `
         }
     }
 `;
-document.head.appendChild(style); 
+document.head.appendChild(style);
+
+// Enhanced Product Card Functionality
+function initializeEnhancedProductCards() {
+    // Initialize wishlist functionality
+    initializeWishlist();
+    
+    // Initialize quick view functionality
+    initializeQuickView();
+    
+    // Initialize share functionality
+    initializeShare();
+    
+    // Initialize enhanced cart functionality
+    initializeEnhancedCart();
+    
+    // Initialize stock bar animations
+    initializeStockAnimations();
+}
+
+// Wishlist Functionality
+function initializeWishlist() {
+    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    
+    // Update wishlist button states
+    updateWishlistStates();
+    
+    // Add event listeners to wishlist buttons
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.wishlist-btn')) {
+            e.preventDefault();
+            const btn = e.target.closest('.wishlist-btn');
+            const productId = btn.dataset.id;
+            toggleWishlist(productId, btn);
+        }
+    });
+    
+    function toggleWishlist(productId, btn) {
+        const icon = btn.querySelector('i');
+        
+        if (wishlist.includes(productId)) {
+            // Remove from wishlist
+            wishlist = wishlist.filter(id => id !== productId);
+            icon.classList.remove('fas');
+            icon.classList.add('far');
+            btn.classList.remove('active');
+            showNotification('Removed from wishlist', 'info');
+        } else {
+            // Add to wishlist
+            wishlist.push(productId);
+            icon.classList.remove('far');
+            icon.classList.add('fas');
+            btn.classList.add('active');
+            showNotification('Added to wishlist', 'success');
+            
+            // Add animation
+            btn.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        updateWishlistCounter();
+    }
+    
+    function updateWishlistStates() {
+        document.querySelectorAll('.wishlist-btn').forEach(btn => {
+            const productId = btn.dataset.id;
+            const icon = btn.querySelector('i');
+            
+            if (wishlist.includes(productId)) {
+                icon.classList.remove('far');
+                icon.classList.add('fas');
+                btn.classList.add('active');
+            }
+        });
+    }
+    
+    function updateWishlistCounter() {
+        const counter = document.querySelector('.wishlist-count');
+        if (counter) {
+            counter.textContent = wishlist.length;
+        }
+    }
+}
+
+// Quick View Functionality
+function initializeQuickView() {
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.quick-view-btn')) {
+            e.preventDefault();
+            const btn = e.target.closest('.quick-view-btn');
+            const productId = btn.dataset.id;
+            openQuickView(productId);
+        }
+    });
+    
+    function openQuickView(productId) {
+        // Find product data
+        const product = window.products?.find(p => p.id == productId);
+        if (!product) {
+            showNotification('Product not found', 'error');
+            return;
+        }
+        
+        // Create modal HTML
+        const modalHTML = `
+            <div class="quick-view-modal" id="quick-view-modal">
+                <div class="modal-overlay"></div>
+                <div class="modal-content">
+                    <button class="modal-close" aria-label="Close modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="quick-view-content">
+                        <div class="quick-view-image">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                        <div class="quick-view-info">
+                            <div class="product-category">
+                                <i class="fas fa-seedling"></i>
+                                <span>${product.category}</span>
+                            </div>
+                            <h2>${product.name}</h2>
+                            <div class="rating">
+                                ${'★'.repeat(Math.floor(product.rating))}${'☆'.repeat(5 - Math.floor(product.rating))}
+                                <span>(${product.rating})</span>
+                            </div>
+                            <div class="price-display">
+                                ${product.originalPrice ? `<span class="original-price">₹${product.originalPrice}</span>` : ''}
+                                <span class="current-price">₹${product.price}</span>
+                            </div>
+                            <p class="description">${product.description}</p>
+                            <div class="stock-status">
+                                <span class="stock-badge ${product.stock > 0 ? 'in-stock' : 'out-of-stock'}">
+                                    ${product.stock > 0 ? 'In Stock' : 'Out of Stock'}
+                                </span>
+                                ${product.stock > 0 ? `<span class="stock-count">${product.stock} available</span>` : ''}
+                            </div>
+                            <div class="quick-actions">
+                                <div class="quantity-selector">
+                                    <button type="button" class="qty-btn minus">-</button>
+                                    <input type="number" class="qty-input" value="1" min="1" max="${product.stock}">
+                                    <button type="button" class="qty-btn plus">+</button>
+                                </div>
+                                <button class="btn-primary add-to-cart-quick" data-id="${product.id}">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Insert modal into DOM
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        
+        // Show modal with animation
+        const modal = document.getElementById('quick-view-modal');
+        requestAnimationFrame(() => {
+            modal.classList.add('active');
+        });
+        
+        // Add event listeners
+        setupQuickViewListeners(modal);
+    }
+    
+    function setupQuickViewListeners(modal) {
+        // Close modal
+        modal.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay') || e.target.closest('.modal-close')) {
+                closeQuickView(modal);
+            }
+        });
+        
+        // Quantity controls
+        const qtyInput = modal.querySelector('.qty-input');
+        const minusBtn = modal.querySelector('.qty-btn.minus');
+        const plusBtn = modal.querySelector('.qty-btn.plus');
+        
+        minusBtn.addEventListener('click', () => {
+            const currentValue = parseInt(qtyInput.value);
+            if (currentValue > 1) {
+                qtyInput.value = currentValue - 1;
+            }
+        });
+        
+        plusBtn.addEventListener('click', () => {
+            const currentValue = parseInt(qtyInput.value);
+            const maxValue = parseInt(qtyInput.max);
+            if (currentValue < maxValue) {
+                qtyInput.value = currentValue + 1;
+            }
+        });
+        
+        // Add to cart from quick view
+        modal.querySelector('.add-to-cart-quick').addEventListener('click', function() {
+            const productId = this.dataset.id;
+            const quantity = parseInt(qtyInput.value);
+            addToCart(productId, quantity);
+            closeQuickView(modal);
+        });
+    }
+    
+    function closeQuickView(modal) {
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.remove();
+        }, 300);
+    }
+}
+
+// Share Functionality
+function initializeShare() {
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.share-btn')) {
+            e.preventDefault();
+            const btn = e.target.closest('.share-btn');
+            const productId = btn.dataset.id;
+            shareProduct(productId);
+        }
+    });
+    
+    function shareProduct(productId) {
+        const product = window.products?.find(p => p.id == productId);
+        if (!product) return;
+        
+        const shareData = {
+            title: product.name,
+            text: `Check out this amazing product: ${product.name}`,
+            url: `${window.location.origin}${window.location.pathname}?product=${productId}`
+        };
+        
+        if (navigator.share) {
+            navigator.share(shareData).catch(err => console.log('Error sharing:', err));
+        } else {
+            // Fallback to clipboard
+            navigator.clipboard.writeText(shareData.url).then(() => {
+                showNotification('Product link copied to clipboard!', 'success');
+            }).catch(() => {
+                showNotification('Could not copy link', 'error');
+            });
+        }
+    }
+}
+
+// Enhanced Cart Functionality
+function initializeEnhancedCart() {
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.add-to-cart-btn') || e.target.closest('.add-to-cart-overlay')) {
+            e.preventDefault();
+            const btn = e.target.closest('.add-to-cart-btn, .add-to-cart-overlay');
+            const productId = btn.dataset.id;
+            addToCartWithAnimation(btn, productId);
+        }
+    });
+    
+    function addToCartWithAnimation(btn, productId, quantity = 1) {
+        // Add loading state
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding...';
+        btn.disabled = true;
+        
+        // Simulate API call delay
+        setTimeout(() => {
+            // Add to cart
+            addToCart(productId, quantity);
+            
+            // Success animation
+            btn.innerHTML = '<i class="fas fa-check"></i> Added!';
+            btn.classList.add('success');
+            
+            // Reset button after delay
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+                btn.classList.remove('success');
+            }, 2000);
+            
+            // Animate the button
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 150);
+            
+        }, 500);
+    }
+}
+
+// Stock Bar Animations
+function initializeStockAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const stockFill = entry.target.querySelector('.stock-fill');
+                if (stockFill) {
+                    stockFill.style.transition = 'width 1s ease-out';
+                    const targetWidth = stockFill.style.width;
+                    stockFill.style.width = '0%';
+                    
+                    setTimeout(() => {
+                        stockFill.style.width = targetWidth;
+                    }, 100);
+                }
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    document.querySelectorAll('.stock-indicator').forEach(indicator => {
+        observer.observe(indicator);
+    });
+}
+
+// Enhanced CSS for notifications and modals
+const enhancedStyles = `
+<style>
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 10000;
+    max-width: 300px;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.success {
+    border-left: 4px solid #4caf50;
+}
+
+.notification.error {
+    border-left: 4px solid #f44336;
+}
+
+.notification.info {
+    border-left: 4px solid #2196f3;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quick-view-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.quick-view-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: white;
+    border-radius: 12px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 80vh;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.quick-view-modal.active .modal-content {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quick-view-content {
+    display: flex;
+    min-height: 400px;
+}
+
+.quick-view-image {
+    flex: 1;
+    background: #f8f9fa;
+}
+
+.quick-view-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.quick-view-info {
+    flex: 1;
+    padding: 30px;
+}
+
+.quick-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.qty-btn {
+    border: none;
+    background: #f8f9fa;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qty-btn:hover {
+    background: #e9ecef;
+}
+
+.qty-input {
+    border: none;
+    width: 50px;
+    height: 35px;
+    text-align: center;
+    background: white;
+}
+
+.btn-primary.success {
+    background: #4caf50 !important;
+}
+
+.wishlist-btn.active {
+    background: #ff6b6b !important;
+    color: white !important;
+}
+
+@media (max-width: 768px) {
+    .quick-view-content {
+        flex-direction: column;
+    }
+    
+    .quick-view-image {
+        height: 250px;
+    }
+    
+    .quick-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .quantity-selector {
+        justify-content: center;
+    }
+}
+</style>
+`;
+
+// Inject enhanced styles
+if (!document.querySelector('#enhanced-product-styles')) {
+    const styleElement = document.createElement('div');
+    styleElement.id = 'enhanced-product-styles';
+    styleElement.innerHTML = enhancedStyles;
+    document.head.appendChild(styleElement);
+} 
