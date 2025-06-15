@@ -480,9 +480,9 @@ function formatDate(date) {
 }
 
 function formatCurrency(amount) {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
         style: 'currency',
-        currency: 'USD'
+        currency: 'INR'
     }).format(amount);
 }
 
@@ -810,13 +810,13 @@ function renderOrders(orders) {
                         <div class="item-details">
                             <h4>${item.name}</h4>
                             <p>Quantity: ${item.quantity}</p>
-                            <p>Price: $${item.price}</p>
+                            <p>Price: ₹${item.price}</p>
                         </div>
                     </div>
                 `).join('')}
             </div>
             <div class="order-footer">
-                <span class="order-total">Total: $${order.total}</span>
+                <span class="order-total">Total: ₹${order.total}</span>
                 <button class="btn-view-details" onclick="viewOrderDetails('${order.id}')">
                     View Details
                 </button>

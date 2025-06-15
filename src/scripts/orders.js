@@ -94,7 +94,7 @@ function createOrderElement(order) {
         <div class="order-details">
             <p><strong>Product:</strong> ${order.productName}</p>
             <p><strong>Quantity:</strong> ${order.quantity}</p>
-            <p><strong>Total Amount:</strong> ${order.totalAmount} ETH</p>
+            <p><strong>Total Amount:</strong> ₹${order.totalAmount}</p>
             <p><strong>Date:</strong> ${order.createdAt.toLocaleDateString()}</p>
         </div>
         <div class="order-actions">

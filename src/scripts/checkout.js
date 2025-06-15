@@ -307,7 +307,7 @@ function initializeSmartContractUI() {
                     <h3>Smart Contract Details</h3>
                     <p>Contract Address: <span id="contract-address">${CONTRACT_CONFIG.address}</span></p>
                     <div class="contract-balance">
-                        <p>Your balance: <span id="wallet-balance">0 ETH</span></p>
+                        <p>Your balance: <span id="wallet-balance">₹0</span></p>
                     </div>
                 </div>
                 <div class="transaction-status" style="display: none;">
@@ -429,7 +429,7 @@ async function connectWallet() {
                 const balance = await web3.eth.getBalance(accounts[0]);
                 const ethBalance = web3.utils.fromWei(balance, 'ether');
                 if (walletBalanceSpan) {
-                    walletBalanceSpan.textContent = parseFloat(ethBalance).toFixed(4) + ' ETH';
+                    walletBalanceSpan.textContent = '₹' + parseFloat(ethBalance).toFixed(2);
                 }
             } catch (balanceError) {
                 console.error('Error getting balance:', balanceError);
