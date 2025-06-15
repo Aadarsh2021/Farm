@@ -693,7 +693,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.setupFilters();
             this.setupProductActions();
             this.setupLoadMore();
-            this.loadInitialProducts();
+            // this.loadInitialProducts(); // Disabled to use HTML content instead
         },
 
         setupFilters() {
@@ -845,7 +845,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!productGrid) return;
 
             // Get bestseller products (you can replace this with your actual data source)
-            const bestsellerProducts = window.products.filter(product => product.isBestseller);
+            const bestsellerProducts = window.products.filter(product => product.bestseller);
 
             // Display initial products
             bestsellerProducts.slice(0, 8).forEach(product => {
@@ -859,7 +859,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!productGrid) return;
 
             // Get more bestseller products
-            const bestsellerProducts = window.products.filter(product => product.isBestseller);
+            const bestsellerProducts = window.products.filter(product => product.bestseller);
             const currentCount = productGrid.children.length;
             const nextProducts = bestsellerProducts.slice(currentCount, currentCount + 4);
 
@@ -871,45 +871,87 @@ document.addEventListener('DOMContentLoaded', () => {
 
         createProductCard(product) {
             const card = document.createElement('div');
-            card.className = 'product-card';
+            card.className = 'product-card enhanced-card';
             card.setAttribute('data-category', product.category);
             card.setAttribute('data-id', product.id);
 
+            // Calculate discount percentage
+            const discountPercent = product.originalPrice ? 
+                Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0;
+
+            // Get category icon
+            const categoryIcons = {
+                'vegetables': 'fas fa-leaf',
+                'fruits': 'fas fa-apple-alt',
+                'grains': 'fas fa-seedling',
+                'pulses': 'fas fa-spa'
+            };
+
             card.innerHTML = `
                 <div class="product-image">
-                    <img src="${product.image}" alt="${product.name}">
+                    <img src="${product.image}" alt="${product.name}" loading="lazy">
                     <div class="product-badges">
-                        ${product.discount ? `<span class="discount-badge">-${product.discount}%</span>` : ''}
+                        ${discountPercent > 0 ? `<span class="discount-badge">-${discountPercent}%</span>` : ''}
+                        ${product.bestseller ? '<span class="bestseller-badge">Best Seller</span>' : ''}
                         ${product.isNew ? '<span class="new-badge">New</span>' : ''}
-                        ${product.isBestseller ? '<span class="best-seller-badge">Best Seller</span>' : ''}
+                        ${product.isOrganic ? '<span class="organic-badge">Organic</span>' : ''}
+                        ${product.isPremium ? '<span class="premium-badge">Premium</span>' : ''}
+                        ${product.isFresh ? '<span class="fresh-badge">Fresh</span>' : ''}
                     </div>
                     <div class="product-actions">
-                        <button class="wishlist-btn" title="Add to Wishlist" data-id="${product.id}">
+                        <button class="action-btn wishlist-btn" title="Add to Wishlist" data-id="${product.id}">
                             <i class="far fa-heart"></i>
                         </button>
-                        <button class="quick-view-btn" title="Quick View">
+                        <button class="action-btn quick-view-btn" title="Quick View" data-id="${product.id}">
                             <i class="far fa-eye"></i>
+                        </button>
+                        <button class="action-btn share-btn" title="Share Product" data-id="${product.id}">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                    <div class="product-overlay">
+                        <button class="add-to-cart-overlay" data-id="${product.id}">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
                         </button>
                     </div>
                 </div>
                 <div class="product-info">
-                    <div class="product-category">${product.category}</div>
+                    <div class="product-category">
+                        <i class="${categoryIcons[product.category] || 'fas fa-tag'}"></i>
+                        <span>${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</span>
+                    </div>
                     <h3 class="product-title">${product.name}</h3>
                     <div class="product-rating">
-                        ${renderStars(product.rating)}
-                        <span>(${product.reviews})</span>
+                        <div class="stars">
+                            ${renderStars(product.rating)}
+                        </div>
+                        <span class="rating-count">(${product.reviews || Math.floor(Math.random() * 300) + 50} reviews)</span>
                     </div>
                     <div class="product-price">
-                        ${product.discount ? `
-                            <span class="original-price">₹${product.originalPrice.toLocaleString('en-IN')}</span>
+                        <div class="price-main">
                             <span class="current-price">₹${product.price.toLocaleString('en-IN')}</span>
-                        ` : `
-                            <span class="current-price">₹${product.price.toLocaleString('en-IN')}</span>
-                        `}
+                            ${product.originalPrice ? `<span class="original-price">₹${product.originalPrice.toLocaleString('en-IN')}</span>` : ''}
+                        </div>
+                        <div class="price-per-unit">per kg</div>
                     </div>
-                    <button class="add-to-cart-btn" data-id="${product.id}">
+                    <div class="product-stock">
+                        <div class="stock-indicator">
+                            <span class="stock-bar ${product.stock < 20 ? 'urgent' : ''}">
+                                <span class="stock-fill" style="width: ${Math.min((product.stock / 50) * 100, 100)}%"></span>
+                            </span>
+                            <span class="stock-text ${product.stock < 20 ? 'urgent' : ''}">${product.stock} left</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-footer">
+                    <button class="btn-primary add-to-cart-btn" data-id="${product.id}">
                         <i class="fas fa-shopping-cart"></i>
-                        Add to Cart
+                        <span>Add to Cart</span>
+                    </button>
+                    <button class="btn-secondary view-details-btn" data-id="${product.id}">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Details</span>
                     </button>
                 </div>
             `;
