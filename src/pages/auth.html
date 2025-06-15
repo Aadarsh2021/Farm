@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: https:; connect-src 'self'">
+    <meta name="theme-color" content="#ffffff">
+    <title>Authentication - Farmease</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/auth.css">
+    <link rel="stylesheet" href="../styles/dark-mode.css">
+    <link rel="stylesheet" href="../styles/navigation.css">
+    <link rel="stylesheet" href="../styles/mobile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <a href="../../index.html" class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>Farmease</span>
+                </a>
+                <h2 id="auth-title">Welcome Back!</h2>
+                <p id="auth-subtitle">Sign in to access your account</p>
+            </div>
+
+            <div class="auth-form">
+                <!-- Tab Navigation -->
+                <div class="auth-tabs">
+                    <button class="tab-btn active" data-tab="signin" onclick="switchTab('signin')">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Sign In</span>
+                    </button>
+                    <button class="tab-btn" data-tab="register" onclick="switchTab('register')">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Register</span>
+                    </button>
+                </div>
+
+                <!-- Sign In Form -->
+                <div id="signin-form" class="auth-form-content active">
+                    <form id="signinForm" class="form">
+                        <div class="form-group">
+                            <label for="signin-email">Email Address</label>
+                            <div class="input-group">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="signin-email" name="email" required 
+                                       placeholder="Enter your email"
+                                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                       title="Please enter a valid email address">
+                            </div>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="signin-password">Password</label>
+                            <div class="input-group">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="signin-password" name="password" required 
+                                       placeholder="Enter your password"
+                                       minlength="8"
+                                       title="Password must be at least 8 characters long">
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="remember-me">
+                                <input type="checkbox" id="rememberMe">
+                                <span class="checkmark"></span>
+                                Remember me
+                            </label>
+                            <a href="auth/forgot-password.html" class="forgot-password">Forgot Password?</a>
+                        </div>
+
+                        <button type="submit" class="auth-button">
+                            <span>Sign In</span>
+                            <i class="fas fa-arrow-right"></i>
+                            <div class="loading-spinner"></div>
+                        </button>
+                    </form>
+
+                    <div class="social-login">
+                        <p>Or sign in with</p>
+                        <div class="social-buttons">
+                            <button type="button" class="social-button google" onclick="signInWithGoogle()">
+                                <i class="fab fa-google"></i>
+                                <span>Google</span>
+                            </button>
+                            <button type="button" class="social-button facebook" onclick="signInWithFacebook()">
+                                <i class="fab fa-facebook-f"></i>
+                                <span>Facebook</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Register Form -->
+                <div id="register-form" class="auth-form-content">
+                    <form id="registerForm" class="form">
+                        <div class="form-group">
+                            <label for="register-name">Full Name</label>
+                            <div class="input-group">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="register-name" name="name" required 
+                                       placeholder="Enter your full name"
+                                       minlength="2"
+                                       title="Please enter your full name">
+                            </div>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-email">Email Address</label>
+                            <div class="input-group">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="register-email" name="email" required 
+                                       placeholder="Enter your email"
+                                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                       title="Please enter a valid email address">
+                            </div>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-password">Password</label>
+                            <div class="input-group">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="register-password" name="password" required 
+                                       placeholder="Create a password"
+                                       minlength="8"
+                                       title="Password must be at least 8 characters long">
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="password-strength">
+                                <div class="strength-meter">
+                                    <div class="strength-meter-fill" data-strength="0"></div>
+                                </div>
+                                <div class="strength-text"></div>
+                            </div>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-confirm-password">Confirm Password</label>
+                            <div class="input-group">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="register-confirm-password" name="confirmPassword" required 
+                                       placeholder="Confirm your password">
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <span class="checkmark"></span>
+                                I agree to the <a href="../terms.html" target="_blank">Terms of Service</a> and <a href="../privacy.html" target="_blank">Privacy Policy</a>
+                            </label>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <button type="submit" class="auth-button">
+                            <span>Create Account</span>
+                            <i class="fas fa-arrow-right"></i>
+                            <div class="loading-spinner"></div>
+                        </button>
+                    </form>
+
+                    <div class="social-login">
+                        <p>Or register with</p>
+                        <div class="social-buttons">
+                            <button type="button" class="social-button google" onclick="signUpWithGoogle()">
+                                <i class="fab fa-google"></i>
+                                <span>Google</span>
+                            </button>
+                            <button type="button" class="social-button facebook" onclick="signUpWithFacebook()">
+                                <i class="fab fa-facebook-f"></i>
+                                <span>Facebook</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="auth-footer">
+                    <p id="auth-footer-text">Don't have an account? <a href="#" onclick="switchTab('register')">Sign Up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../scripts/dark-mode.js"></script>
+    <script src="../scripts/navigation.js"></script>
+    <script src="../scripts/auth.js"></script>
+    <script src="../scripts/script.js"></script>
+    
+    <script>
+        // Enhanced Tab Switching with Animations
+        function switchTab(tab) {
+            const signinForm = document.getElementById('signin-form');
+            const registerForm = document.getElementById('register-form');
+            const signinTab = document.querySelector('[data-tab="signin"]');
+            const registerTab = document.querySelector('[data-tab="register"]');
+            const authTitle = document.getElementById('auth-title');
+            const authSubtitle = document.getElementById('auth-subtitle');
+            const authFooterText = document.getElementById('auth-footer-text');
+
+            // Remove active classes
+            signinForm.classList.remove('active');
+            registerForm.classList.remove('active');
+            signinTab.classList.remove('active');
+            registerTab.classList.remove('active');
+
+            if (tab === 'signin') {
+                signinForm.classList.add('active');
+                signinTab.classList.add('active');
+                authTitle.textContent = 'Welcome Back!';
+                authSubtitle.textContent = 'Sign in to access your account';
+                authFooterText.innerHTML = 'Don\'t have an account? <a href="#" onclick="switchTab(\'register\')">Sign Up</a>';
+            } else {
+                registerForm.classList.add('active');
+                registerTab.classList.add('active');
+                authTitle.textContent = 'Create Account';
+                authSubtitle.textContent = 'Join our agricultural marketplace';
+                authFooterText.innerHTML = 'Already have an account? <a href="#" onclick="switchTab(\'signin\')">Sign In</a>';
+            }
+        }
+
+        // Enhanced Form Validation
+        function validateForm(form) {
+            const inputs = form.querySelectorAll('input[required]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                const formGroup = input.closest('.form-group');
+                const errorMessage = formGroup.querySelector('.error-message');
+                
+                if (!input.value.trim()) {
+                    showError(formGroup, errorMessage, 'This field is required');
+                    isValid = false;
+                } else if (input.type === 'email' && !isValidEmail(input.value)) {
+                    showError(formGroup, errorMessage, 'Please enter a valid email address');
+                    isValid = false;
+                } else if (input.type === 'password' && input.value.length < 8) {
+                    showError(formGroup, errorMessage, 'Password must be at least 8 characters long');
+                    isValid = false;
+                } else {
+                    clearError(formGroup, errorMessage);
+                }
+            });
+
+            return isValid;
+        }
+
+        function showError(formGroup, errorMessage, message) {
+            formGroup.classList.add('error');
+            errorMessage.textContent = message;
+        }
+
+        function clearError(formGroup, errorMessage) {
+            formGroup.classList.remove('error');
+            errorMessage.textContent = '';
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Password Strength Meter
+        const passwordInput = document.getElementById('register-password');
+        const strengthMeter = document.querySelector('.strength-meter-fill');
+        const strengthText = document.querySelector('.strength-text');
+
+        if (passwordInput && strengthMeter && strengthText) {
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                const strength = calculatePasswordStrength(password);
+                updatePasswordStrength(strength);
+            });
+        }
+
+        function calculatePasswordStrength(password) {
+            let strength = 0;
+            
+            if (password.length >= 8) strength += 25;
+            if (/\d/.test(password)) strength += 25;
+            if (/[a-z]/.test(password)) strength += 25;
+            if (/[A-Z]/.test(password)) strength += 25;
+            
+            return strength;
+        }
+
+        function updatePasswordStrength(strength) {
+            strengthMeter.style.width = strength + '%';
+            strengthMeter.dataset.strength = strength;
+            
+            if (strength < 25) {
+                strengthText.textContent = 'Weak';
+                strengthMeter.style.backgroundColor = '#ff4444';
+            } else if (strength < 50) {
+                strengthText.textContent = 'Fair';
+                strengthMeter.style.backgroundColor = '#ffbb33';
+            } else if (strength < 75) {
+                strengthText.textContent = 'Good';
+                strengthMeter.style.backgroundColor = '#00C851';
+            } else {
+                strengthText.textContent = 'Strong';
+                strengthMeter.style.backgroundColor = '#007E33';
+            }
+        }
+
+        // Password Visibility Toggle
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('input');
+                const icon = this.querySelector('i');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+        });
+
+        // Form Submission Handlers
+        document.getElementById('signinForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (validateForm(this)) {
+                const button = this.querySelector('.auth-button');
+                button.classList.add('loading');
+                
+                // Simulate API call
+                setTimeout(() => {
+                    button.classList.remove('loading');
+                    // Add your sign-in logic here
+                    console.log('Sign in successful');
+                }, 2000);
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (validateForm(this)) {
+                const button = this.querySelector('.auth-button');
+                button.classList.add('loading');
+                
+                // Simulate API call
+                setTimeout(() => {
+                    button.classList.remove('loading');
+                    // Add your registration logic here
+                    console.log('Registration successful');
+                }, 2000);
+            }
+        });
+
+        // Social Login Functions
+        function signInWithGoogle() {
+            console.log('Sign in with Google');
+            // Add Google OAuth logic here
+        }
+
+        function signInWithFacebook() {
+            console.log('Sign in with Facebook');
+            // Add Facebook OAuth logic here
+        }
+
+        function signUpWithGoogle() {
+            console.log('Sign up with Google');
+            // Add Google OAuth logic here
+        }
+
+        function signUpWithFacebook() {
+            console.log('Sign up with Facebook');
+            // Add Facebook OAuth logic here
+        }
+    </script>
+</body>
+</html> 

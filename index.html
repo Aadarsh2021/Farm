@@ -14,30 +14,30 @@
     <meta name="apple-mobile-web-app-title" content="Farmease">
     <link rel="canonical" href="https://farm-phi-jade.vercel.app/">
     <link rel="manifest" href="/manifest.json">
-    <link rel="apple-touch-icon" href="/images/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/src/assets/icon-192x192.png">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://farm-phi-jade.vercel.app/">
     <meta property="og:title" content="Farmease - Your Agricultural Marketplace">
     <meta property="og:description" content="Shop premium agricultural products at Farmease. Fresh fruits, vegetables, seeds, cereals, fertilizers, and farming tools delivered to your doorstep.">
-    <meta property="og:image" content="https://farm-phi-jade.vercel.app/images/hero-farm.jpg">
+    <meta property="og:image" content="https://farm-phi-jade.vercel.app/src/assets/hero-farm.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://farm-phi-jade.vercel.app/">
     <meta property="twitter:title" content="Farmease - Your Agricultural Marketplace">
     <meta property="twitter:description" content="Shop premium agricultural products at Farmease. Fresh fruits, vegetables, seeds, cereals, fertilizers, and farming tools delivered to your doorstep.">
-    <meta property="twitter:image" content="https://farm-phi-jade.vercel.app/images/hero-farm.jpg">
+    <meta property="twitter:image" content="https://farm-phi-jade.vercel.app/src/assets/hero-farm.jpg">
     
     <title>Farmease - Your Agricultural Marketplace | Seeds, Fruits, Vegetables & Farm Tools</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/dark-mode.css">
-    <link rel="stylesheet" href="css/navigation.css">
-    <link rel="stylesheet" href="css/chatbot.css">
-    <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="src/styles/home.css">
+    <link rel="stylesheet" href="src/styles/style.css">
+    <link rel="stylesheet" href="src/styles/dark-mode.css">
+    <link rel="stylesheet" href="src/styles/navigation.css">
+    <link rel="stylesheet" href="src/styles/chatbot.css">
+    <link rel="stylesheet" href="src/styles/mobile.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -56,11 +56,8 @@
                             <option value="seeds">Seeds</option>
                             <option value="fruits">Fruits</option>
                             <option value="vegetables">Vegetables</option>
-                            <option value="cereals">Cereals</option>
-                            <option value="fertilizers">Fertilizers</option>
-                            <option value="tools">Tools</option>
-                            <option value="equipment">Equipment</option>
-                            <option value="pesticides">Pesticides</option>
+                            <option value="grains">Grains</option>
+                            <option value="pulses">Pulses</option>
                         </select>
                     </div>
                     <input type="text" placeholder="Search for products...">
@@ -68,38 +65,35 @@
                 </div>
             </div>
             <div class="nav-icons">
-                <button class="theme-toggle" id="themeToggle">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon"></i>
                 </button>
-                <a href="pages/cart.html" class="cart-icon">
+                <a href="src/pages/cart.html" class="cart-icon" aria-label="Shopping cart">
                     <i class="fas fa-shopping-cart"></i>
                     <span>Cart</span>
                     <span class="cart-count">0</span>
                 </a>
-                <a href="pages/account.html" class="account-icon">
+                <a href="src/pages/auth.html" class="account-icon" aria-label="My account">
                     <i class="fas fa-user"></i>
                     <span>Account</span>
                 </a>
-                <button class="mobile-menu-toggle">
+                <button class="mobile-menu-toggle" aria-label="Open menu">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
         </nav>
         <div class="category-nav">
             <ul>
-                <li><a href="pages/products.html?category=seeds"><i class="fas fa-seedling"></i> Seeds</a></li>
-                <li><a href="pages/products.html?category=fruits"><i class="fas fa-apple-alt"></i> Fruits</a></li>
-                <li><a href="pages/products.html?category=vegetables"><i class="fas fa-carrot"></i> Vegetables</a></li>
-                <li><a href="pages/products.html?category=cereals"><i class="fas fa-bread-slice"></i> Cereals</a></li>
-                <li><a href="pages/products.html?category=fertilizers"><i class="fas fa-flask"></i> Fertilizers</a></li>
-                <li><a href="pages/products.html?category=tools"><i class="fas fa-tools"></i> Tools</a></li>
-                <li><a href="pages/products.html?category=equipment"><i class="fas fa-tractor"></i> Equipment</a></li>
-                <li><a href="pages/products.html?category=pesticides"><i class="fas fa-bug"></i> Pesticides</a></li>
+                <li><a href="src/pages/products.html?category=seeds"><i class="fas fa-seedling"></i> Seeds</a></li>
+                <li><a href="src/pages/products.html?category=fruits"><i class="fas fa-apple-alt"></i> Fruits</a></li>
+                <li><a href="src/pages/products.html?category=vegetables"><i class="fas fa-carrot"></i> Vegetables</a></li>
+                <li><a href="src/pages/products.html?category=grains"><i class="fas fa-bread-slice"></i> Grains</a></li>
+                <li><a href="src/pages/products.html?category=pulses"><i class="fas fa-seedling"></i> Pulses</a></li>
             </ul>
         </div>
         <div class="mobile-menu">
             <div class="mobile-menu-header">
-                <button class="mobile-menu-close">
+                <button class="mobile-menu-close" aria-label="Close menu">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -109,18 +103,15 @@
                     <button><i class="fas fa-search"></i></button>
                 </div>
                 <ul class="mobile-categories">
-                    <li><a href="pages/products.html?category=seeds"><i class="fas fa-seedling"></i> Seeds</a></li>
-                    <li><a href="pages/products.html?category=fruits"><i class="fas fa-apple-alt"></i> Fruits</a></li>
-                    <li><a href="pages/products.html?category=vegetables"><i class="fas fa-carrot"></i> Vegetables</a></li>
-                    <li><a href="pages/products.html?category=cereals"><i class="fas fa-bread-slice"></i> Cereals</a></li>
-                    <li><a href="pages/products.html?category=fertilizers"><i class="fas fa-flask"></i> Fertilizers</a></li>
-                    <li><a href="pages/products.html?category=tools"><i class="fas fa-tools"></i> Tools</a></li>
-                    <li><a href="pages/products.html?category=equipment"><i class="fas fa-tractor"></i> Equipment</a></li>
-                    <li><a href="pages/products.html?category=pesticides"><i class="fas fa-bug"></i> Pesticides</a></li>
+                    <li><a href="src/pages/products.html?category=seeds"><i class="fas fa-seedling"></i> Seeds</a></li>
+                    <li><a href="src/pages/products.html?category=fruits"><i class="fas fa-apple-alt"></i> Fruits</a></li>
+                    <li><a href="src/pages/products.html?category=vegetables"><i class="fas fa-carrot"></i> Vegetables</a></li>
+                    <li><a href="src/pages/products.html?category=grains"><i class="fas fa-bread-slice"></i> Grains</a></li>
+                    <li><a href="src/pages/products.html?category=pulses"><i class="fas fa-seedling"></i> Pulses</a></li>
                 </ul>
                 <div class="mobile-account">
-                    <a href="pages/account.html"><i class="fas fa-user"></i> My Account</a>
-                    <a href="pages/cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+                    <a href="src/pages/auth.html"><i class="fas fa-user"></i> My Account</a>
+                    <a href="src/pages/cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
                 </div>
             </div>
         </div>
@@ -131,7 +122,7 @@
             <div class="slider-container">
                 <div class="slide active">
                     <div class="slide-image">
-                        <img src="images/fresh-vegetables.jpg" alt="Organic Vegetables">
+                        <img src="src/assets/fresh-vegetables.jpg" alt="Organic Vegetables">
                     </div>
                     <div class="slide-content">
                         <span class="product-badge">Best Seller</span>
@@ -157,11 +148,11 @@
                             <span class="discount">-20%</span>
                         </div>
                         <div class="product-actions">
-                            <a href="pages/products.html?category=vegetables" class="cta-button">
+                            <a href="src/pages/products.html?category=vegetables" class="cta-button">
                                 <i class="fas fa-shopping-cart"></i>
                                 Shop Now
                             </a>
-                            <a href="pages/products.html?category=vegetables" class="secondary-button">
+                            <a href="src/pages/products.html?category=vegetables" class="secondary-button">
                                 <i class="fas fa-eye"></i>
                                 View Details
                             </a>
@@ -170,7 +161,7 @@
                 </div>
                 <div class="slide">
                     <div class="slide-image">
-                        <img src="images/apple.jpg" alt="Fresh Fruits">
+                        <img src="src/assets/apple.jpg" alt="Fresh Fruits">
                     </div>
                     <div class="slide-content">
                         <span class="product-badge">New Arrival</span>
@@ -196,11 +187,11 @@
                             <span class="discount">-15%</span>
                         </div>
                         <div class="product-actions">
-                            <a href="pages/products.html?category=fruits" class="cta-button">
+                            <a href="src/pages/products.html?category=fruits" class="cta-button">
                                 <i class="fas fa-shopping-cart"></i>
                                 Shop Now
                             </a>
-                            <a href="pages/products.html?category=fruits" class="secondary-button">
+                            <a href="src/pages/products.html?category=fruits" class="secondary-button">
                                 <i class="fas fa-eye"></i>
                                 View Details
                             </a>
@@ -209,7 +200,7 @@
                 </div>
                 <div class="slide">
                     <div class="slide-image">
-                        <img src="images/grains.jpg" alt="Organic Grains">
+                        <img src="src/assets/grains.jpg" alt="Organic Grains">
                     </div>
                     <div class="slide-content">
                         <span class="product-badge">Limited Time</span>
@@ -235,11 +226,11 @@
                             <span class="discount">-25%</span>
                         </div>
                         <div class="product-actions">
-                            <a href="pages/products.html?category=cereals" class="cta-button">
+                            <a href="src/pages/products.html?category=cereals" class="cta-button">
                                 <i class="fas fa-shopping-cart"></i>
                                 Shop Now
                             </a>
-                            <a href="pages/products.html?category=cereals" class="secondary-button">
+                            <a href="src/pages/products.html?category=cereals" class="secondary-button">
                                 <i class="fas fa-eye"></i>
                                 View Details
                             </a>
@@ -249,12 +240,12 @@
             </div>
             <div class="slider-controls">
                 <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
-                <div class="slider-dots">
-                    <span class="dot active" data-slide="0"></span>
-                    <span class="dot" data-slide="1"></span>
-                    <span class="dot" data-slide="2"></span>
-                </div>
                 <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="slider-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
             </div>
         </div>
 
@@ -291,200 +282,620 @@
             </div>
         </div>
 
-        <div class="main-content">
-            <section class="featured-categories" id="featured-categories">
-                <div class="section-header">
-                    <h2>Shop by Category</h2>
-                    <a href="pages/categories.html" class="view-all">View All Categories <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="category-grid">
-                    <a href="pages/products.html?category=seeds" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-seedling"></i>
-                        </div>
-                        <img src="images/fresh-vegetables.jpg" alt="Seeds">
-                        <h3>Seeds</h3>
-                        <span class="product-count">5 Products</span>
-                    </a>
-                    <a href="pages/products.html?category=fruits" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-apple-alt"></i>
-                        </div>
-                        <img src="images/apple.jpg" alt="Fruits">
-                        <h3>Fruits</h3>
-                        <span class="product-count">4 Products</span>
-                    </a>
-                    <a href="pages/products.html?category=vegetables" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-carrot"></i>
-                        </div>
-                        <img src="images/tomato.jpg" alt="Vegetables">
-                        <h3>Vegetables</h3>
-                        <span class="product-count">6 Products</span>
-                    </a>
-                    <a href="pages/products.html?category=cereals" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-bread-slice"></i>
-                        </div>
-                        <img src="images/rice.jpg" alt="Cereals">
-                        <h3>Cereals</h3>
-                        <span class="product-count">5 Products</span>
-                    </a>
-                    <a href="pages/products.html?category=fertilizers" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-flask"></i>
-                        </div>
-                        <img src="images/grains.jpg" alt="Fertilizers">
-                        <h3>Fertilizers</h3>
-                        <span class="product-count">2 Products</span>
-                    </a>
-                    <a href="pages/products.html?category=tools" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <img src="images/pattern.svg" alt="Tools">
-                        <h3>Tools</h3>
-                        <span class="product-count">3 Products</span>
-                    </a>
-                    <a href="pages/products.html?category=equipment" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-tractor"></i>
-                        </div>
-                        <img src="images/farmease_logo.jpg" alt="Equipment">
-                        <h3>Equipment</h3>
-                        <span class="product-count">2 Products</span>
-                    </a>
-                    <a href="pages/products.html?category=pesticides" class="category-card">
-                        <div class="category-icon">
-                            <i class="fas fa-bug"></i>
-                        </div>
-                        <img src="images/grains.jpg" alt="Pesticides">
-                        <h3>Pesticides</h3>
-                        <span class="product-count">2 Products</span>
-                    </a>
-                </div>
-            </section>
-
-            <section class="deals">
+        <!-- Today's Deals Section -->
+        <section class="deals">
+            <div class="container">
                 <div class="section-header">
                     <h2>Today's Deals</h2>
+                    <p>Limited time offers on premium agricultural products</p>
+                </div>
+                
+                <div class="deals-header">
                     <div class="countdown">
-                        <span>Ends in:</span>
-                        <div class="timer">
-                            <span>12</span>
-                            <span>:</span>
-                            <span>45</span>
-                            <span>:</span>
-                            <span>30</span>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="hours">24</span>
+                            <span class="countdown-label">Hours</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="minutes">00</span>
+                            <span class="countdown-label">Minutes</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="seconds">00</span>
+                            <span class="countdown-label">Seconds</span>
+                        </div>
+                    </div>
+                    <div class="deals-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%"></div>
+                        </div>
+                        <p>75% of deals claimed</p>
+                    </div>
+                </div>
+
+                <div class="deals-categories">
+                    <button class="category-btn active">All Products</button>
+                    <button class="category-btn">Vegetables</button>
+                    <button class="category-btn">Grains</button>
+                    <button class="category-btn">Fruits</button>
+                </div>
+
+                <div class="deals-grid">
+                    <div class="product-card">
+                        <div class="product-badge">-30%</div>
+                        <div class="product-image">
+                            <img src="src/assets/tomato.jpg" alt="Organic Tomato Seeds">
+                            <div class="product-actions">
+                                <button class="action-btn wishlist"><i class="fas fa-heart"></i></button>
+                                <button class="action-btn quick-view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Vegetables</div>
+                            <h3 class="product-title">Organic Tomato Seeds</h3>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>(128)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="original-price">₹150</span>
+                                <span class="sale-price">₹120</span>
+                            </div>
+                            <div class="product-stock">
+                                <span class="stock-label">Only</span>
+                                <span class="stock-number">50</span>
+                                <span class="stock-text">left</span>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <a href="src/pages/products.html" class="btn shop-now">
+                                Shop Now <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="src/pages/product-details.html" class="btn view-details">
+                                View Details <i class="fas fa-info-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-badge">-25%</div>
+                        <div class="product-image">
+                            <img src="src/assets/fresh-vegetables.jpg" alt="Fresh Vegetables Pack">
+                            <div class="product-actions">
+                                <button class="action-btn wishlist"><i class="fas fa-heart"></i></button>
+                                <button class="action-btn quick-view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Vegetables</div>
+                            <h3 class="product-title">Fresh Vegetables Pack</h3>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>(256)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">$29.99</span>
+                                <span class="original-price">$39.99</span>
+                            </div>
+                            <div class="product-stock">
+                                <span class="stock-label">Only</span>
+                                <span class="stock-number">8</span>
+                                <span class="stock-text">left</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-badge">-40%</div>
+                        <div class="product-image">
+                            <img src="src/assets/grains.jpg" alt="Premium Grains Collection">
+                            <div class="product-actions">
+                                <button class="action-btn wishlist"><i class="fas fa-heart"></i></button>
+                                <button class="action-btn quick-view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Grains</div>
+                            <h3 class="product-title">Premium Grains Collection</h3>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>(89)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">$49.99</span>
+                                <span class="original-price">$79.99</span>
+                            </div>
+                            <div class="product-stock">
+                                <span class="stock-label">Only</span>
+                                <span class="stock-number">5</span>
+                                <span class="stock-text">left</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-badge">-35%</div>
+                        <div class="product-image">
+                            <img src="src/assets/apple.jpg" alt="Fresh Apples">
+                            <div class="product-actions">
+                                <button class="action-btn wishlist"><i class="fas fa-heart"></i></button>
+                                <button class="action-btn quick-view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Fruits</div>
+                            <h3 class="product-title">Fresh Apples Pack</h3>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>(167)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">$19.99</span>
+                                <span class="original-price">$29.99</span>
+                            </div>
+                            <div class="product-stock">
+                                <span class="stock-label">Only</span>
+                                <span class="stock-number">12</span>
+                                <span class="stock-text">left</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-badge">-20%</div>
+                        <div class="product-image">
+                            <img src="src/assets/banana.jpg" alt="Organic Bananas">
+                            <div class="product-actions">
+                                <button class="action-btn wishlist"><i class="fas fa-heart"></i></button>
+                                <button class="action-btn quick-view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Fruits</div>
+                            <h3 class="product-title">Organic Bananas</h3>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>(143)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">$8.99</span>
+                                <span class="original-price">$11.99</span>
+                            </div>
+                            <div class="product-stock">
+                                <span class="stock-label">Only</span>
+                                <span class="stock-number">20</span>
+                                <span class="stock-text">left</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-badge">-45%</div>
+                        <div class="product-image">
+                            <img src="src/assets/spinach.jpg" alt="Fresh Spinach">
+                            <div class="product-actions">
+                                <button class="action-btn wishlist"><i class="fas fa-heart"></i></button>
+                                <button class="action-btn quick-view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn add-to-cart"><i class="fas fa-shopping-cart"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Vegetables</div>
+                            <h3 class="product-title">Fresh Spinach Bundle</h3>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>(98)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="current-price">$6.99</span>
+                                <span class="original-price">$12.99</span>
+                            </div>
+                            <div class="product-stock">
+                                <span class="stock-label">Only</span>
+                                <span class="stock-number">10</span>
+                                <span class="stock-text">left</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="product-grid">
-                    <div class="product-card" data-product-id="1">
-                        <div class="product-image">
-                            <img src="images/fresh-vegetables.jpg" alt="Product 1">
-                            <span class="discount">-20%</span>
-                            <div class="product-actions">
-                                <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                                <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Seeds</div>
-                            <h3>Organic Tomato Seeds</h3>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>(4.5)</span>
-                            </div>
-                            <div class="price-container">
-                                <span class="original-price">₹12.99</span>
-                                <span class="price">₹9.99</span>
-                            </div>
-                            <button class="add-to-cart">
-                                <i class="fas fa-shopping-cart"></i>
-                                Add to Cart
-                            </button>
-                        </div>
+
+                <div class="deals-footer">
+                    <button class="load-more-btn">Load More Deals</button>
+                    <a href="src/pages/products.html" class="view-all-btn">View All Deals <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <div class="main-content">
+            <section class="featured-categories">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Shop by Category</h2>
+                        <a href="src/pages/categories.html" class="view-all">
+                            View All Categories
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
-                    <div class="product-card" data-product-id="2">
-                        <div class="product-image">
-                            <img src="images/grains.jpg" alt="Product 2">
-                            <span class="discount">-15%</span>
-                            <div class="product-actions">
-                                <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                                <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                    <div class="category-grid">
+                        <!-- Seeds Category -->
+                        <a href="src/category/seeds.html" class="category-card">
+                            <div class="category-icon">
+                                <i class="fas fa-seedling"></i>
                             </div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Fertilizers</div>
-                            <h3>Natural Fertilizer</h3>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>(4.5)</span>
+                            <img src="src/assets/seeds.jpg" alt="Seeds Collection" loading="lazy">
+                            <h3>Seeds</h3>
+                            <span class="product-count">120+ Products</span>
+                            <div class="category-overlay">
+                                <p class="category-description">High-quality organic seeds for your garden. From vegetables to flowers, find the perfect seeds for your needs.</p>
+                                <span class="category-link">
+                                    Explore Seeds
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
                             </div>
-                            <div class="price-container">
-                                <span class="original-price">₹29.99</span>
-                                <span class="price">₹24.99</span>
+                        </a>
+
+                        <!-- Fruits Category -->
+                        <a href="src/category/fruits.html" class="category-card">
+                            <div class="category-icon">
+                                <i class="fas fa-apple-alt"></i>
                             </div>
-                            <button class="add-to-cart">
-                                <i class="fas fa-shopping-cart"></i>
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-card" data-product-id="3">
-                        <div class="product-image">
-                            <img src="images/pattern.svg" alt="Product 3">
-                            <span class="discount">-25%</span>
-                            <div class="product-actions">
-                                <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                                <button class="quick-view-btn"><i class="fas fa-eye"></i></button>
+                            <img src="src/assets/apple.jpg" alt="Fresh Fruits" loading="lazy">
+                            <h3>Fruits</h3>
+                            <span class="product-count">85+ Products</span>
+                            <div class="category-overlay">
+                                <p class="category-description">Fresh, seasonal fruits sourced directly from local farmers. Enjoy nature's sweetest offerings.</p>
+                                <span class="category-link">
+                                    Explore Fruits
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
                             </div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Tools</div>
-                            <h3>Garden Tools Set</h3>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>(4.5)</span>
+                        </a>
+
+                        <!-- Vegetables Category -->
+                        <a href="src/category/vegetables.html" class="category-card">
+                            <div class="category-icon">
+                                <i class="fas fa-carrot"></i>
                             </div>
-                            <div class="price-container">
-                                <span class="original-price">₹69.99</span>
-                                <span class="price">₹49.99</span>
+                            <img src="src/assets/fresh-vegetables.jpg" alt="Fresh Vegetables" loading="lazy">
+                            <h3>Vegetables</h3>
+                            <span class="product-count">150+ Products</span>
+                            <div class="category-overlay">
+                                <p class="category-description">Farm-fresh vegetables delivered to your doorstep. Organic and locally grown for maximum freshness.</p>
+                                <span class="category-link">
+                                    Explore Vegetables
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
                             </div>
-                            <button class="add-to-cart">
-                                <i class="fas fa-shopping-cart"></i>
-                                Add to Cart
-                            </button>
-                        </div>
+                        </a>
+
+                        <!-- Grains Category -->
+                        <a href="src/category/grains.html" class="category-card">
+                            <div class="category-icon">
+                                <i class="fas fa-wheat"></i>
+                            </div>
+                            <img src="src/assets/brown-rice.jpg" alt="Premium Grains" loading="lazy">
+                            <h3>Grains</h3>
+                            <span class="product-count">45+ Products</span>
+                            <div class="category-overlay">
+                                <p class="category-description">Premium quality grains and cereals. From rice to wheat, find the perfect staple for your kitchen.</p>
+                                <span class="category-link">
+                                    Explore Grains
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
+                            </div>
+                        </a>
+
+                        <!-- Pulses Category -->
+                        <a href="src/category/pulses.html" class="category-card">
+                            <div class="category-icon">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <img src="src/assets/arhar-dal.jpg" alt="Organic Pulses" loading="lazy">
+                            <h3>Pulses</h3>
+                            <span class="product-count">60+ Products</span>
+                            <div class="category-overlay">
+                                <p class="category-description">Organic pulses and lentils. Rich in protein and essential nutrients for a healthy diet.</p>
+                                <span class="category-link">
+                                    Explore Pulses
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
+                            </div>
+                        </a>
+
+                        <!-- Organic Category -->
+                        <a href="src/category/organic.html" class="category-card">
+                            <div class="category-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <img src="src/assets/spinach.jpg" alt="Organic Products" loading="lazy">
+                            <h3>Organic</h3>
+                            <span class="product-count">95+ Products</span>
+                            <div class="category-overlay">
+                                <p class="category-description">Certified organic products grown without harmful chemicals. Pure, natural, and healthy.</p>
+                                <span class="category-link">
+                                    Explore Organic
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </section>
 
             <section class="featured-products">
                 <div class="section-header">
-                    <h2>Featured Products</h2>
+                    <div class="section-title">
+                        <h2>Featured Products</h2>
+                        <p class="section-subtitle">Discover our handpicked selection of premium agricultural products</p>
+                    </div>
                     <div class="product-filters">
-                        <button class="filter-btn active" data-filter="all">All</button>
-                        <button class="filter-btn" data-filter="seeds">Seeds</button>
-                        <button class="filter-btn" data-filter="fertilizers">Fertilizers</button>
-                        <button class="filter-btn" data-filter="tools">Tools</button>
+                        <button class="filter-btn active" data-category="all">All Products</button>
+                        <button class="filter-btn" data-category="vegetables">Vegetables</button>
+                        <button class="filter-btn" data-category="fruits">Fruits</button>
+                        <button class="filter-btn" data-category="grains">Grains</button>
+                        <button class="filter-btn" data-category="pulses">Pulses</button>
                     </div>
                 </div>
                 <div class="product-grid" id="featured-products-grid">
-                    <!-- Products will be loaded dynamically by JavaScript -->
+                    <!-- Product 1 -->
+                    <div class="product-card" data-category="vegetables" data-id="1">
+                        <div class="product-image">
+                            <img src="src/assets/tomato.jpg" alt="Fresh Tomatoes">
+                            <div class="product-badges">
+                                <span class="discount-badge">-20%</span>
+                                <span class="new-badge">New</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="wishlist-btn" title="Add to Wishlist">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="quick-view-btn" title="Quick View">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Vegetables</div>
+                            <h3 class="product-title">Fresh Tomatoes</h3>
+                            <div class="rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="reviews">(128)</span>
+                            </div>
+                            <div class="price-container">
+                                <span class="original-price">₹80/kg</span>
+                                <span class="price">₹64/kg</span>
+                            </div>
+                            <div class="stock-info">
+                                <span class="stock-badge in-stock">In Stock</span>
+                                <span class="stock-count">Only 15 left</span>
+                            </div>
+                            <button class="add-to-cart" data-id="1">
+                                <i class="fas fa-shopping-cart"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-card" data-category="fruits" data-id="2">
+                        <div class="product-image">
+                            <img src="src/assets/apple.jpg" alt="Fresh Apples">
+                            <div class="product-badges">
+                                <span class="discount-badge">-15%</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="wishlist-btn" title="Add to Wishlist">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="quick-view-btn" title="Quick View">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Fruits</div>
+                            <h3 class="product-title">Fresh Apples</h3>
+                            <div class="rating">
+                                <span class="stars">★★★★☆</span>
+                                <span class="reviews">(95)</span>
+                            </div>
+                            <div class="price-container">
+                                <span class="original-price">₹200/kg</span>
+                                <span class="price">₹170/kg</span>
+                            </div>
+                            <div class="stock-info">
+                                <span class="stock-badge in-stock">In Stock</span>
+                                <span class="stock-count">Only 20 left</span>
+                            </div>
+                            <button class="add-to-cart" data-id="2">
+                                <i class="fas fa-shopping-cart"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="product-card" data-category="grains" data-id="3">
+                        <div class="product-image">
+                            <img src="src/assets/rice.jpg" alt="Premium Rice">
+                            <div class="product-badges">
+                                <span class="discount-badge">-10%</span>
+                                <span class="best-seller-badge">Best Seller</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="wishlist-btn" title="Add to Wishlist">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="quick-view-btn" title="Quick View">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Grains</div>
+                            <h3 class="product-title">Premium Rice</h3>
+                            <div class="rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="reviews">(256)</span>
+                            </div>
+                            <div class="price-container">
+                                <span class="original-price">₹120/kg</span>
+                                <span class="price">₹108/kg</span>
+                            </div>
+                            <div class="stock-info">
+                                <span class="stock-badge in-stock">In Stock</span>
+                                <span class="stock-count">Only 25 left</span>
+                            </div>
+                            <button class="add-to-cart" data-id="3">
+                                <i class="fas fa-shopping-cart"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="product-card" data-category="pulses" data-id="4">
+                        <div class="product-image">
+                            <img src="src/assets/moong-dal.jpg" alt="Moong Dal">
+                            <div class="product-badges">
+                                <span class="discount-badge">-25%</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="wishlist-btn" title="Add to Wishlist">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="quick-view-btn" title="Quick View">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Pulses</div>
+                            <h3 class="product-title">Organic Moong Dal</h3>
+                            <div class="rating">
+                                <span class="stars">★★★★☆</span>
+                                <span class="reviews">(78)</span>
+                            </div>
+                            <div class="price-container">
+                                <span class="original-price">₹160/kg</span>
+                                <span class="price">₹120/kg</span>
+                            </div>
+                            <div class="stock-info">
+                                <span class="stock-badge in-stock">In Stock</span>
+                                <span class="stock-count">Only 18 left</span>
+                            </div>
+                            <button class="add-to-cart" data-id="4">
+                                <i class="fas fa-shopping-cart"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product 5 -->
+                    <div class="product-card" data-category="vegetables" data-id="5">
+                        <div class="product-image">
+                            <img src="src/assets/spinach.jpg" alt="Fresh Spinach">
+                            <div class="product-badges">
+                                <span class="discount-badge">-30%</span>
+                                <span class="new-badge">New</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="wishlist-btn" title="Add to Wishlist">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="quick-view-btn" title="Quick View">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Vegetables</div>
+                            <h3 class="product-title">Fresh Spinach</h3>
+                            <div class="rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="reviews">(112)</span>
+                            </div>
+                            <div class="price-container">
+                                <span class="original-price">₹60/kg</span>
+                                <span class="price">₹42/kg</span>
+                            </div>
+                            <div class="stock-info">
+                                <span class="stock-badge in-stock">In Stock</span>
+                                <span class="stock-count">Only 12 left</span>
+                            </div>
+                            <button class="add-to-cart" data-id="5">
+                                <i class="fas fa-shopping-cart"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product 6 -->
+                    <div class="product-card" data-category="fruits" data-id="6">
+                        <div class="product-image">
+                            <img src="src/assets/banana.jpg" alt="Fresh Bananas">
+                            <div class="product-badges">
+                                <span class="discount-badge">-20%</span>
+                            </div>
+                            <div class="product-actions">
+                                <button class="wishlist-btn" title="Add to Wishlist">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="quick-view-btn" title="Quick View">
+                                    <i class="far fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Fruits</div>
+                            <h3 class="product-title">Fresh Bananas</h3>
+                            <div class="rating">
+                                <span class="stars">★★★★☆</span>
+                                <span class="reviews">(89)</span>
+                            </div>
+                            <div class="price-container">
+                                <span class="original-price">₹80/kg</span>
+                                <span class="price">₹64/kg</span>
+                            </div>
+                            <div class="stock-info">
+                                <span class="stock-badge in-stock">In Stock</span>
+                                <span class="stock-count">Only 22 left</span>
+                            </div>
+                            <button class="add-to-cart" data-id="6">
+                                <i class="fas fa-shopping-cart"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="load-more">
                     <button class="load-more-btn">
@@ -494,180 +905,173 @@
                 </div>
             </section>
 
-            <section class="newsletter">
-                <div class="newsletter-content">
-                    <h2>Subscribe to Our Newsletter</h2>
-                    <p>Get the latest updates on new products and upcoming sales</p>
-                    <form class="newsletter-form">
-                        <div class="form-group">
-                            <input type="email" placeholder="Enter your email address" required>
-                            <button type="submit" class="subscribe-btn">
-                                <i class="fas fa-paper-plane"></i>
-                                Subscribe
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </section>
-
-            <section class="best-sellers">
+            <section class="bestsellers">
                 <div class="section-header">
-                    <h2>Best Sellers</h2>
-                    <a href="pages/products.html?sort=bestsellers" class="view-all">View All Best Sellers <i class="fas fa-arrow-right"></i></a>
+                    <h2>Bestsellers</h2>
+                    <p>Our most popular products loved by customers</p>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all">All Products</button>
+                    <button class="filter-btn" data-category="vegetables">Vegetables</button>
+                    <button class="filter-btn" data-category="fruits">Fruits</button>
+                    <button class="filter-btn" data-category="grains">Grains</button>
+                    <button class="filter-btn" data-category="pulses">Pulses</button>
                 </div>
                 <div class="product-grid">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="images/brown-rice.jpg" alt="Product 1">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Seeds</div>
-                            <h3>Premium Wheat Seeds</h3>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>(4.5)</span>
-                            </div>
-                            <div class="price-container">
-                                <span class="price">₹19.99</span>
-                            </div>
-                            <button class="add-to-cart">
-                                <i class="fas fa-shopping-cart"></i>
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="images/moong-dal.jpg" alt="Product 2">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Fertilizers</div>
-                            <h3>Organic Fertilizer</h3>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>(4.5)</span>
-                            </div>
-                            <div class="price-container">
-                                <span class="price">₹34.99</span>
-                            </div>
-                            <button class="add-to-cart">
-                                <i class="fas fa-shopping-cart"></i>
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="images/arhar-dal.jpg" alt="Product 3">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">Tools</div>
-                            <h3>Professional Tool Kit</h3>
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span>(4.5)</span>
-                            </div>
-                            <div class="price-container">
-                                <span class="price">₹89.99</span>
-                            </div>
-                            <button class="add-to-cart">
-                                <i class="fas fa-shopping-cart"></i>
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
+                    <!-- Product cards will be dynamically added here -->
+                </div>
+                <div class="load-more">
+                    <button class="load-more-btn">
+                        <i class="fas fa-plus"></i>
+                        Load More Products
+                    </button>
                 </div>
             </section>
         </div>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <div class="footer-logo">
-                    <i class="fas fa-leaf"></i>
-                    Farmease
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section about">
+                        <div class="footer-logo">
+                            <i class="fas fa-leaf"></i>
+                            <a href="index.html">Farmease</a>
+                        </div>
+                        <p class="footer-description">Your trusted partner in agricultural products and solutions. We bring the best quality products from farm to your table.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section links">
+                        <h4>Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                            <li><a href="src/pages/about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                            <li><a href="src/pages/products.html"><i class="fas fa-chevron-right"></i> Products</a></li>
+                            <li><a href="src/pages/categories.html"><i class="fas fa-chevron-right"></i> Categories</a></li>
+                            <li><a href="src/pages/contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section contact">
+                        <h4>Contact Info</h4>
+                        <ul class="contact-info">
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <span>Phone</span>
+                                    <a href="tel:+1234567890">+1 234 567 890</a>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <span>Email</span>
+                                    <a href="mailto:support@farmease.com">support@farmease.com</a>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <span>Address</span>
+                                    <address>123 Farm Street, Agriculture City</address>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section support">
+                        <h4>Customer Support</h4>
+                        <ul class="support-links">
+                            <li>
+                                <a href="src/pages/track-order.html">
+                                    <i class="fas fa-truck"></i>
+                                    <span>Track Order</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="src/pages/support.html">
+                                    <i class="fas fa-headset"></i>
+                                    <span>24/7 Support</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="src/pages/faq.html">
+                                    <i class="fas fa-question-circle"></i>
+                                    <span>FAQ</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="src/pages/returns.html">
+                                    <i class="fas fa-undo"></i>
+                                    <span>Returns</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section newsletter">
+                        <h4>Newsletter</h4>
+                        <p>Subscribe to our newsletter for updates and exclusive offers.</p>
+                        <form class="newsletter-form" id="footer-newsletter-form">
+                            <div class="form-group">
+                                <input type="email" placeholder="Enter your email" required>
+                                <button type="submit" class="subscribe-btn">
+                                    <i class="fas fa-paper-plane"></i>
+                                    <span>Subscribe</span>
+                                </button>
+                            </div>
+                            <div class="form-message"></div>
+                        </form>
+                    </div>
                 </div>
-                <p>Your trusted partner in agricultural products and solutions.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h4>Contact Info</h4>
-                <ul>
-                    <li><i class="fas fa-phone"></i> +1 234 567 890</li>
-                    <li><i class="fas fa-envelope"></i> support@farmease.com</li>
-                    <li><i class="fas fa-map-marker-alt"></i> 123 Farm Street, Agriculture City</li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="pages/about.html">About Us</a></li>
-                    <li><a href="pages/products.html">Products</a></li>
-                    <li><a href="pages/categories.html">Categories</a></li>
-                    <li><a href="pages/contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Customer Support</h4>
-                <ul>
-                    <li><a href="pages/track-order.html"><i class="fas fa-truck"></i> Track Order</a></li>
-                    <li><a href="pages/support.html"><i class="fas fa-headset"></i> 24/7 Support</a></li>
-                    <li><a href="pages/faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
-                    <li><a href="pages/returns.html"><i class="fas fa-undo"></i> Returns</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Newsletter</h4>
-                <p>Subscribe to our newsletter for updates and exclusive offers.</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email">
-                    <button type="submit">Subscribe</button>
-                </form>
             </div>
         </div>
+        
         <div class="footer-bottom">
             <div class="container">
-                <p>&copy; 2024 Farmease. All rights reserved.</p>
-                <div class="payment-methods">
-                    <i class="fab fa-cc-visa"></i>
-                    <i class="fab fa-cc-mastercard"></i>
-                    <i class="fab fa-cc-paypal"></i>
-                    <i class="fab fa-cc-amex"></i>
+                <div class="footer-bottom-content">
+                    <div class="footer-bottom-left">
+                        <p class="copyright">&copy; 2024 Farmease. All rights reserved.</p>
+                    </div>
+                    <div class="footer-bottom-right">
+                        <div class="footer-bottom-links">
+                            <a href="src/pages/privacy.html">Privacy Policy</a>
+                            <a href="src/pages/terms.html">Terms of Service</a>
+                            <a href="src/pages/shipping.html">Shipping Policy</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
-    <script src="js/seo.js"></script>
-    <script src="js/dark-mode.js"></script>
-    <script src="js/products-data.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/chatbot.js"></script>
-    <script src="js/script.js"></script>
+    <script src="src/scripts/products-data.js"></script>
+    <script src="src/scripts/seo.js"></script>
+    <script src="src/scripts/dark-mode.js"></script>
+    <script src="src/scripts/navigation.js"></script>
+    <script src="src/scripts/chatbot.js"></script>
+    <script src="src/scripts/script.js"></script>
     <script>
         // Register Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
+                navigator.serviceWorker.register('/service-worker.js')
                     .then(registration => {
                         console.log('ServiceWorker registration successful');
                     })
